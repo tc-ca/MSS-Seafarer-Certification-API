@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeafarersAPI", "SeafarersAPI\SeafarersAPI.csproj", "{51A6F7DA-7C21-42D7-A6CB-0B52AEED59CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_Test", "API_Test\API_Test.csproj", "{01C0297C-0000-43E5-B716-5A86D858E8A8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{51A6F7DA-7C21-42D7-A6CB-0B52AEED59CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51A6F7DA-7C21-42D7-A6CB-0B52AEED59CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51A6F7DA-7C21-42D7-A6CB-0B52AEED59CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51A6F7DA-7C21-42D7-A6CB-0B52AEED59CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01C0297C-0000-43E5-B716-5A86D858E8A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01C0297C-0000-43E5-B716-5A86D858E8A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01C0297C-0000-43E5-B716-5A86D858E8A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01C0297C-0000-43E5-B716-5A86D858E8A8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EAAAA567-EE6A-41E6-B477-655132434120}
+	EndGlobalSection
+EndGlobal
