@@ -26,9 +26,9 @@ namespace SeafarersAPI.Services
 
         }
 
-        public List<Submission> GetSubmissionsByCDNnumber(string cdn_number)
+        public List<Submission> GetSubmissionsByCDNnumber(string cdnNumber)
         {
-            return repo.GetSubmissionsByCDNnumber(cdn_number).ToList();
+            return repo.GetSubmissionsByCDNnumber(cdnNumber).ToList();
         }
 
         public Submission GetSubmissionByConfirmationNumber(int confirmationNumber)
