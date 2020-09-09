@@ -24,7 +24,8 @@ namespace SeafarersAPI.Controllers
         }
 
         // GET: api/Submissions/2
-        [HttpGet("{id}", Name = "Get")]
+        //[HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id:int}")] // I like this better - Chris
         public Submission GetBySubmissionID(int id)
         {
             return submissionService.GetSubmissionById(id);
