@@ -3,56 +3,57 @@ using SeafarersAPI.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SeafarersAPI.Data.Repositories
 {
-    public class SubmissionRepository
+    public class SubmissionRepository : IRepository<Submission>
     {
         public SubmissionContext context;
         public SubmissionRepository()
         {
-            if(context== null)
+            if(context == null)
             {
                 context = new SubmissionContext();
             }
         }
 
-        public List<Submission> GetSubmissions()
+        public IEnumerable<Submission> GetList(int startIndex, int amountToGet)
         {
-            return context.Submissions.ToList();
+            return context.Submissions.Skip(startIndex).Take(amountToGet).ToList();
+        }
+
+        public int Save(Submission submission)
+        {
+            // TODO: Add locking mechanism or we'll run into concurrency issues
+            context.Submissions.Add(submission);
+            return context.SaveChanges();
+        }
+
+        public int Delete(Submission submission)
+        {
+            // TODO: Add locking mechanism or we'll run into concurrency issues
+            context.Entry(submission).State = EntityState.Deleted;
+            return context.SaveChanges();
         }
 
         public Submission GetSubmissionById(int submissionId)
         {
-            var submission = context.Submissions.Where(x => x.SubmissionId == submissionId).SingleOrDefault();
-
-            return submission;
+            return this.GetSubmissionsByFilter(x => x.SubmissionId == submissionId).SingleOrDefault();
         }
 
-        public List<Submission> GetSubmissionsByCDNnumber(string cdn_number)
+        public IEnumerable<Submission> GetSubmissionsByCDNnumber(string cdnNumber)
         {
-            return context.Submissions.Where(x => x.CdnNumber == cdn_number).ToList();
+            return this.GetSubmissionsByFilter(x => x.CdnNumber == cdnNumber);
         }
 
         public Submission GetSubmissionByConfirmationNumber(int confirmationNumber)
         {
-            return context.Submissions.Where(x => x.ConfirmationNumber == confirmationNumber).SingleOrDefault();
+            return this.GetSubmissionsByFilter(x => x.ConfirmationNumber == confirmationNumber).SingleOrDefault();
         }
 
-        public void SaveSubmission(Submission submission)
+        private IEnumerable<Submission> GetSubmissionsByFilter(Func<Submission, bool> filter)
         {
-            context.Submissions.Add(submission);
-            context.SaveChanges();
+            return context.Submissions.Where(filter);
         }
-
-        public void DeleteSubmissionById(int submissionId)
-        {
-            var submission = new Submission { SubmissionId = submissionId };
-
-            context.Entry(submission).State = EntityState.Deleted;
-            context.SaveChanges();
-        }
-
     }
 }
