@@ -1,16 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using SeafarersAPI.Data.Models;
 
 namespace SeafarersAPI
@@ -32,6 +25,8 @@ namespace SeafarersAPI
             services.AddDbContextPool<SubmissionContext>(options => options.UseLazyLoadingProxies().UseSqlServer("Server=tcp:seafarer-certificates.database.windows.net,1433;Initial Catalog=SeafarerDocumentSubmission;Persist Security Info=False;User ID=scadmin;Password=skPvPaq1;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;")); //TODO: add connection string to key-valt in Azure
             //services.AddDbContextPool<SubmissionContext>(options => options.UseLazyLoadingProxies().UseSqlServer( Configuration.GetConnectionString("AzureSQL")));
 
+            services.AddMvc();
+            services.AddSwaggerGen();
             services.AddSingleton<SubmissionContext>();
         }
 
@@ -42,6 +37,14 @@ namespace SeafarersAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwagger();
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Seafarers API V1");
+                c.RoutePrefix = string.Empty;
+            });
 
             app.UseHttpsRedirection();
 
