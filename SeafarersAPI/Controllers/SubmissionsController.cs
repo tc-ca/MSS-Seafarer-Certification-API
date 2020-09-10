@@ -20,7 +20,7 @@ namespace SeafarersAPI.Controllers
         [HttpGet]
         public List<Submission> Get()
         {
-            return submissionService.GetSubmissions();
+            return submissionService.GetSubmissions(0, 50).ToList();
         }
 
         // GET: api/Submissions/2
@@ -35,7 +35,7 @@ namespace SeafarersAPI.Controllers
         [HttpPost]
         public void Post([FromBody] Submission submission )
         {
-            if(submission.Documents.Count>0)
+            if(submission.Documents.Count > 0)
             {
                 //TODO: check how we can save mutiple files on MTA.
                 // For now, let's asume that there is only one file to store
@@ -50,7 +50,8 @@ namespace SeafarersAPI.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
-            var lenghth=value.Length;
+            // TODO: Configure this input
+            var length = value.Length;
         }
 
 

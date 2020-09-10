@@ -1,9 +1,7 @@
 ﻿using SeafarersAPI.Data.Models;
 using SeafarersAPI.Data.Repositories;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace SeafarersAPI.Services
 {
@@ -16,11 +14,9 @@ namespace SeafarersAPI.Services
             repo = new SubmissionRepository();
         }
 
-
-
-        public List<Submission> GetSubmissions()
+        public IEnumerable<Submission> GetSubmissions(int startingIndex, int amountToGet)
         {
-            return repo.GetSubmissions();
+            return repo.GetList(startingIndex, amountToGet).ToList();
 
         }
 
@@ -30,9 +26,9 @@ namespace SeafarersAPI.Services
 
         }
 
-        public List<Submission> GetSubmissionsByCDNnumber(string cdn_number)
+        public List<Submission> GetSubmissionsByCDNnumber(string cdnNumber)
         {
-            return repo.GetSubmissionsByCDNnumber(cdn_number);
+            return repo.GetSubmissionsByCDNnumber(cdnNumber).ToList();
         }
 
         public Submission GetSubmissionByConfirmationNumber(int confirmationNumber)
@@ -42,15 +38,13 @@ namespace SeafarersAPI.Services
 
         public void SaveSubmission(Submission submission)
         {
-            repo.SaveSubmission(submission);
+            repo.Save(submission);
         }
 
         public void DeleteSubmissionById(int submissionId)
         {
-            repo.DeleteSubmissionById(submissionId);
+            var submission = repo.GetSubmissionById(submissionId);
+            repo.Delete(submission);
         }
-
-
-
     }
 }

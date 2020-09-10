@@ -1,7 +1,5 @@
 ﻿namespace CDNApplication.Data.Services
 {
-    using System;
-    using System.Threading.Tasks;
     using Microsoft.Azure.KeyVault;
     using Microsoft.Azure.KeyVault.Models;
     using Microsoft.Azure.Services.AppAuthentication;
