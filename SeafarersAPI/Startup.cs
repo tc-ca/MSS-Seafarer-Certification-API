@@ -31,7 +31,6 @@ namespace SeafarersAPI
 
             var keyVault = serviceProvider.GetService<AzureKeyVaultService>();
 
-            var t = keyVault.GetSecretByName("Database");
             services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddDbContextPool<SubmissionContext>(options => options.UseLazyLoadingProxies().UseSqlServer(keyVault.GetSecretByName("Database")));
 
